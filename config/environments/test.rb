@@ -20,12 +20,12 @@ Rails.application.configure do
   }
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  # config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
   # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  # config.action_dispatch.show_exceptions = false
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
@@ -49,4 +49,7 @@ Rails.application.configure do
   ## Custom
   # Devise mailer
   config.action_mailer.default_url_options = { host: ENV["app_hostname"], port: ENV["app_portname"].to_i }
+  # Exceptions for 404/500
+  config.action_dispatch.show_exceptions = true
+  config.consider_all_requests_local = false
 end

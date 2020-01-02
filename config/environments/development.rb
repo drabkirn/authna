@@ -10,7 +10,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
-  config.consider_all_requests_local = true
+  # config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -63,4 +63,7 @@ Rails.application.configure do
   ## Custom
   # Devise mailer
   config.action_mailer.default_url_options = { host: ENV["app_hostname"], port: ENV["app_portname"].to_i }
+  
+  # For 404/500
+  config.consider_all_requests_local = false
 end

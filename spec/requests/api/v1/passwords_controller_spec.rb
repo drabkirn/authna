@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::PasswordsController, type: :request do
   let(:user) { create(:confirmed_user) }
-  let(:v_headers) { valid_headers_without_authorization }
+  let(:api_v_headers) { api_valid_headers_without_authorization }
 
   describe "POST #forget" do
     context "when request is valid" do
       before(:each) do
-        post api_auth_password_forgot_path, params: { user: { email: user.email } }.to_json, headers: v_headers
+        post api_auth_password_forgot_path, params: { user: { email: user.email } }.to_json, headers: api_v_headers
       end
 
       it "returns password_reset_message_sent message" do
@@ -19,7 +19,7 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
 
     context "when request is invalid" do
       before(:each) do
-        post api_auth_password_forgot_path, params: { user: { email: "" } }.to_json, headers: v_headers
+        post api_auth_password_forgot_path, params: { user: { email: "" } }.to_json, headers: api_v_headers
       end
 
       it "returns user_does_not_exist message" do
@@ -27,6 +27,10 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
       end
 
       it_behaves_like 'returns 422 unprocessable entity status'
+    end
+
+    context "with invalid authenticity token" do
+      it_behaves_like 'when csrf token is not present', '/auth/password/forgot'
     end
   end
 
@@ -36,7 +40,7 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
         user.reset_password_token = Devise.friendly_token(40)
         user.reset_password_sent_at = Time.now
         user.save
-        post api_auth_password_recover_path, params: { user: { recovery_token: user.reset_password_token, password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: v_headers
+        post api_auth_password_recover_path, params: { user: { recovery_token: user.reset_password_token, password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: api_v_headers
       end
 
       it "resets reset_password_token of user" do
@@ -65,7 +69,7 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
 
       context "when recovery token is not present/blank" do
         before(:each) do
-          post api_auth_password_recover_path, params: { user: { password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: v_headers
+          post api_auth_password_recover_path, params: { user: { password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: api_v_headers
         end
 
         it "returns recovery_token_not_present message" do
@@ -77,7 +81,7 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
 
       context "when recovery token is wrong" do
         before(:each) do
-          post api_auth_password_recover_path, params: { user: { recovery_token: "abcd", password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: v_headers
+          post api_auth_password_recover_path, params: { user: { recovery_token: "abcd", password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: api_v_headers
         end
 
         it "returns wrong_recovery_token message" do
@@ -89,7 +93,7 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
 
       context "when something is wrong with data - not same passwords" do
         before(:each) do
-          post api_auth_password_recover_path, params: { user: { recovery_token: user.reset_password_token, password: "1234567890", password_confirmation: "12345678" } }.to_json, headers: v_headers
+          post api_auth_password_recover_path, params: { user: { recovery_token: user.reset_password_token, password: "1234567890", password_confirmation: "12345678" } }.to_json, headers: api_v_headers
         end
 
         it "returns password_reset_failure message" do
@@ -97,6 +101,10 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
         end
   
         it_behaves_like 'returns 422 unprocessable entity status'
+      end
+
+      context "with invalid authenticity token" do
+        it_behaves_like 'when csrf token is not present', '/auth/password/recover'
       end
     end
   end

@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :request do
   let(:user) { build(:user) }
-  let(:headers) { valid_headers.except('Authorization') }
-  let(:valid_attributes) do
+  let(:api_v_headers) { api_valid_headers_without_authorization }
+  let(:user_valid_email_credentials) do
     attributes_for(:user, password_confirmation: user.password)
   end
 
-  let(:invalid_credentials) do
+  let(:user_invalid_credentials) do
     {
       user: {
         email: ""
@@ -18,7 +18,9 @@ RSpec.describe Api::V1::UsersController, type: :request do
   # User signup test suite
   describe 'POST /auth/signup' do
     context 'when valid request' do
-      before { post '/auth/signup', params: { user: valid_attributes }.to_json, headers: headers }
+      before do
+        post api_auth_signup_path, params: { user: user_valid_email_credentials }.to_json, headers: api_v_headers
+      end
 
       it 'returns success message' do
         expect(json['data']['message']).to eq Message.user_account_created
@@ -39,11 +41,11 @@ RSpec.describe Api::V1::UsersController, type: :request do
         }
         user.otp_secret_key = json['data']['user_otp_secret_key']
         user_obj = {
-          email: valid_attributes[:email],
-          username: valid_attributes[:username],
+          email: user_valid_email_credentials[:email],
+          username: user_valid_email_credentials[:username],
           user_otp_secret_key: user.otp_secret_key,
           user_otp_module: user.otp_module,
-          user_email_confirmation: valid_attributes[:confirmed_at],
+          user_email_confirmation: user_valid_email_credentials[:confirmed_at],
           user_github_linked: user.provider?
         }
         expect(auth_user_obj).to eq user_obj
@@ -54,7 +56,9 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
     context 'when invalid request' do
       context "when invalid credentials" do
-        before { post '/auth/signup', params: invalid_credentials, headers: headers }
+        before do
+          post api_auth_signup_path, params: user_invalid_credentials, headers: api_v_headers
+        end
         
         it 'returns failure message' do
           expect(json['errors']['message'])

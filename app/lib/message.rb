@@ -29,6 +29,14 @@ class Message
     "Signature has expired, thus your token has expired. Please login again to continue."
   end
 
+  def self.accept_header_wrong
+    "Exception: You've included wrong Accept header in your request."
+  end
+
+  def self.accept_header_missing
+    "Exception: You've not included a valid Accept header in your request."
+  end
+
   # Emails
   def self.email_successfully_confirmed(email)
     "You've successfully confirmed your email at #{email}. Close this window and continue signing in to the app."
@@ -94,10 +102,14 @@ class Message
 
   # Others, System messages
   def self.invalid_csrf_token
-    "You're not authorized to make this request - CSRF Error."
+    "Exception: You're not authorized to make this request - CSRF Error."
   end
 
-  def self.not_found
+  def self.action_not_found
     "Error: 404 Not found."
+  end
+
+  def self.internal_server_error
+    "Exception: 500 Internal Server error. There is something wrong from our end, check back soon or contact us"
   end
 end

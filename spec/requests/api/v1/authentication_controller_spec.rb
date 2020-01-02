@@ -5,42 +5,17 @@ RSpec.describe Api::V1::AuthenticationController, type: :request do
     # create test user
     let!(:user) { create(:user) }
     # set headers for authorization
-    let(:headers) { valid_headers.except('Authorization') }
+    let(:api_v_headers) { api_valid_headers_without_authorization }
     # set test valid and invalid credentials
-    let(:valid_credentials) do
-      {
-        user: {
-          email: user.email,
-          password: user.password
-        }
-      }.to_json
-    end
-
-    let(:username_valid_credentials) do
-      {
-        user: {
-          username: user.username,
-          password: user.password
-        }
-      }.to_json
-    end
-
-    let(:invalid_credentials) do
-      {
-        user: {
-          email: Faker::Internet.email,
-          password: Faker::Internet.password,
-          username: Faker::Internet.username
-        }
-      }.to_json
-    end
-
-    # set request.headers to our custon headers
-    # before { allow(request).to receive(:headers).and_return(headers) }
+    let(:user_v_email_credentials) { user_valid_email_credentials }
+    let(:user_v_username_credentials) { user_valid_username_credentials }
+    let(:user_inv_credentials) { user_invalid_credentials }
 
     # returns auth token when request is valid
     context 'When request is valid with email' do
-      before { post '/auth/login', params: valid_credentials, headers: headers }
+      before do
+        post api_auth_login_path, params: user_v_email_credentials.to_json, headers: api_v_headers
+      end
 
       it 'returns an authentication token' do
         expect(json['data']['auth_token']).not_to be_nil
@@ -74,7 +49,9 @@ RSpec.describe Api::V1::AuthenticationController, type: :request do
     end
 
     context 'When request is valid with username' do
-      before { post '/auth/login', params: username_valid_credentials, headers: headers }
+      before do
+        post api_auth_login_path, params: user_v_username_credentials.to_json, headers: api_v_headers
+      end
 
       it 'returns an authentication token' do
         expect(json['data']['auth_token']).not_to be_nil
@@ -112,7 +89,9 @@ RSpec.describe Api::V1::AuthenticationController, type: :request do
     # returns failure message when request is invalid
     context 'When request is invalid' do
       context "with invalid credentials" do
-        before { post '/auth/login', params: invalid_credentials, headers: headers }
+        before do
+          post api_auth_login_path, params: user_inv_credentials.to_json, headers: api_v_headers
+        end
 
         it 'returns a failure message' do
           expect(json['errors']['message']).to eq Message.invalid_credentials

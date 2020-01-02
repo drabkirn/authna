@@ -6,6 +6,9 @@ module ExceptionHandler
   class MissingToken < StandardError; end
   class InvalidToken < StandardError; end
   class ExpiredSignature < StandardError; end
+  class MissingAcceptHeader < StandardError; end
+  class WrongAcceptHeader < StandardError; end
+  class InternalServerError < StandardError; end
 
   included do
     # Define custom handlers
@@ -16,6 +19,10 @@ module ExceptionHandler
     rescue_from ExceptionHandler::ExpiredSignature, with: :unauthorized_request
     rescue_from ActiveRecord::RecordNotFound, with: :four_not_four
     rescue_from ActionController::InvalidAuthenticityToken, with: :csrf_invalid_request
+    rescue_from ExceptionHandler::MissingAcceptHeader, with: :unauthorized_request
+    rescue_from ExceptionHandler::WrongAcceptHeader, with: :unauthorized_request
+    rescue_from ActionController::RoutingError, with: :four_not_four
+    rescue_from ExceptionHandler::InternalServerError, with: :five_zero_zero
   end
 
   private
@@ -57,9 +64,20 @@ module ExceptionHandler
     send_response = {
       status: 404,
       errors: {
-        message: "#{e.message}. #{Message.not_found}"
+        message: "#{e.message}. #{Message.action_not_found}"
       }
     }
     json_response(send_response, :not_found)
+  end
+
+  # JSON response with message; Status code 500 - internal server error
+  def five_zero_zero(e)
+    send_response = {
+      status: 500,
+      errors: {
+        message: e.message
+      }
+    }
+    json_response(send_response, :internal_server_error)
   end
 end

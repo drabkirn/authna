@@ -30,5 +30,8 @@ module Authna
       g.assets false
       g.template_engine false
     end
+
+    # Handle exceptions the manual way in API-only app
+    config.exceptions_app = self.routes
   end
 end

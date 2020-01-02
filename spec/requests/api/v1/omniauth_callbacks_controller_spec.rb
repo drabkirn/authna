@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::OmniauthCallbacksController, type: :request do
 
-  let(:headers) { invalid_headers }
+  let(:api_inv_headers) { api_invalid_headers }
 
   describe "Github Authentication" do
     context "when success authentication" do
@@ -18,7 +18,7 @@ RSpec.describe Api::V1::OmniauthCallbacksController, type: :request do
         })
         Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
         Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-        get '/users/auth/github/callback', params: { }, headers: headers
+        get user_github_omniauth_callback_path, params: { }, headers: api_inv_headers
       end
 
       after(:each) do

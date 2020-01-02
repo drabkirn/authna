@@ -107,5 +107,4 @@ RSpec.configure do |config|
 
   # Our custom helprs
   config.include RequestSpecHelper
-  config.include ControllerSpecHelper
 end

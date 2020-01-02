@@ -54,23 +54,42 @@ shared_examples 'returns 422 unprocessable entity status' do
     expect(json['status']).to eq 422
   end
 end
+
+shared_examples 'returns 500 internal server error status' do
+  it "returns 500 internal server error status from response" do
+    expect(response).to have_http_status(500)
+  end
+
+  it "returns 500 internal server error status from json" do
+    expect(json['status']).to eq 500
+  end
+end
 ## Shared examples STATUS Messages END
 
 ## CSRF Token START
 shared_examples 'when csrf token is not present' do |action|
   before(:each) do
     ActionController::Base.allow_forgery_protection = true
-    if action == 'create'
-      post api_notes_path, params: valid_attributes.to_json, headers: v_headers
-    elsif action == 'update'
-      @new_title = Faker::Lorem.sentence(3)
-      put api_note_path(valid_note_attributes[:id]), params: { title: @new_title }.to_json, headers: v_headers
-    elsif action == 'destroy'
-      delete api_note_path(valid_note_attributes[:id]), params: {}, headers: v_headers
-    elsif action == '/auth/login'
-      post '/auth/login', params: valid_credentials, headers: headers
+    if action == '/auth/login'
+      post api_auth_login_path, params: user_v_email_credentials.to_json, headers: api_valid_headers
+    elsif action == "/users/confirmation"
+      post user_confirmation_path, params: { user: { email: user.email, confirm_email: user.email } }.to_json, headers: api_v_headers
+    elsif action == "/auth/enable2fa"
+      post api_auth_enable2fa_path, params: { multi_factor_authentication: { otp_code_token: user.otp_code } }.to_json, headers: api_v_headers
+    elsif action == "/auth/disable2fa"
+      post api_auth_disable2fa_path, params: { multi_factor_authentication: { otp_code_token: user.otp_code } }.to_json, headers: api_v_headers
+    elsif action == "/auth/password/forgot"
+      user.reset_password_token = Devise.friendly_token(40)
+      user.reset_password_sent_at = Time.now
+      user.save
+      post api_auth_password_recover_path, params: { user: { recovery_token: user.reset_password_token, password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: api_v_headers
+    elsif action == "/auth/password/recover"
+      user.reset_password_token = Devise.friendly_token(40)
+        user.reset_password_sent_at = Time.now
+        user.save
+        post api_auth_password_recover_path, params: { user: { recovery_token: user.reset_password_token, password: "1234567890", password_confirmation: "1234567890" } }.to_json, headers: api_v_headers
     elsif action == '/auth/signup'
-      post '/auth/signup', params: { user: valid_attributes }.to_json, headers: headers
+      post api_auth_signup_path, params: { user: user_valid_email_credentials }.to_json, headers: api_v_headers
     end
   end
 
