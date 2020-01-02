@@ -3,6 +3,8 @@ test:
   db_username:
   db_password:
   db_name:
+  app_hostname:
+  app_portname:
 
 
 development:
@@ -10,6 +12,8 @@ development:
   db_username:
   db_password:
   db_name:
+  app_hostname:
+  app_portname:
 
 
 production:
@@ -17,3 +21,5 @@ production:
   db_username:
   db_password:
   db_name:
+  app_hostname:
+  app_portname:
