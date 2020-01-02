@@ -6,6 +6,10 @@ test:
   app_hostname:
   app_portname:
 
+  devise_secret_key:
+  devise_pepper_hash:
+  devise_mailer_from_address:
+
 
 development:
   db_hostname:
@@ -15,6 +19,10 @@ development:
   app_hostname:
   app_portname:
 
+  devise_secret_key:
+  devise_pepper_hash:
+  devise_mailer_from_address:
+
 
 production:
   db_hostname:
@@ -23,3 +31,7 @@ production:
   db_name:
   app_hostname:
   app_portname:
+
+  devise_secret_key:
+  devise_pepper_hash:
+  devise_mailer_from_address:
