@@ -27,8 +27,8 @@ module Authna
         request_specs: false
       g.helper false
       # Uncomment if using React/Others for View
-      # g.assets false
-      # g.template_engine false
+      g.assets false
+      g.template_engine false
     end
   end
 end
