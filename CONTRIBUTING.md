@@ -1,7 +1,7 @@
 # Contributing to ProjectName
 
 ## Before Submitting an Issue
-Check that [our issue database](https://github.com/drabkirn/desityle/issues)
+Check that [our issue database](https://github.com/drabkirn/authna/issues)
 doesn't already include that problem or suggestion before submitting an issue.
 If you find a match, you can use the "subscribe" button to get notified on
 updates. Do **not** leave random "+1" or "I have this too" comments, as they
@@ -22,16 +22,16 @@ The more information you can provide, the more likley someone will be successful
 ## How to Contribute
 1. Please add an issue or comment on issues that are open and mention that you are working on it. Then submit a pull request! This will let others know you're working on it.
 
-2. Install the app on your local machine. You need to [Fork](https://help.github.com/articles/fork-a-repo/) this app and then clone it on your local machine. See the Installation section of [README.md](https://github.com/drabkirn/desityle/blob/master/README.md) on how to do the installation.
+2. Install the app on your local machine. You need to [Fork](https://help.github.com/articles/fork-a-repo/) this app and then clone it on your local machine. See the Installation section of [README.md](https://github.com/drabkirn/authna/blob/master/README.md) on how to do the installation.
 
 3. Set the upstream remote so you can keep your copy of the app synced with the original. To do that go to your terminal and cd into your cloned odin project app directory. Then use one of the following commands:
     * If you have ssh set up with Git
       ```bash
-      $ git remote add upstream https://github.com/drabkirn/desityle.git
+      $ git remote add upstream https://github.com/drabkirn/authna.git
       ```
       Or
       ```bash
-      git remote add upstream git@github.com:drabkirn/desityle.git
+      git remote add upstream git@github.com:drabkirn/authna.git
       ```
 
 4. Before you start working on your issue create a branch and name it like the following examples:
