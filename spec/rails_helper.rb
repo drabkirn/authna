@@ -101,4 +101,11 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  # Devise Controller Helpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
+  # Our custom helprs
+  config.include RequestSpecHelper
+  config.include ControllerSpecHelper
 end

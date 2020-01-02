@@ -10,6 +10,11 @@ test:
   devise_pepper_hash:
   devise_mailer_from_address:
 
+  hmac_secret:
+
+  github_client_id:
+  github_secret_key:
+
 
 development:
   db_hostname:
@@ -23,6 +28,11 @@ development:
   devise_pepper_hash:
   devise_mailer_from_address:
 
+  hmac_secret:
+
+  github_client_id:
+  github_secret_key:
+
 
 production:
   db_hostname:
@@ -35,3 +45,8 @@ production:
   devise_secret_key:
   devise_pepper_hash:
   devise_mailer_from_address:
+
+  hmac_secret:
+
+  github_client_id:
+  github_secret_key:
