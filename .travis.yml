@@ -17,8 +17,7 @@ before_install:
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
   - curl -s https://raw.githubusercontent.com/tophat/yvm/master/scripts/install.js | node
-  - ls -la /home/travis/.yvm/
-  - source /home/travis/.yvm/yvm.{sh,fish}
+  - source /home/travis/.yvm/yvm.sh
   - yvm install $YARN_VERSION
   - yvm use $YARN_VERSION
   - gem install bundler:2.0.2
