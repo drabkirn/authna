@@ -37,25 +37,6 @@
 
 ## Installation
 <!-- TODO: Change these steps to mirror your repo's installation -->
-1. Next steps:
-    - Now you can proceed build your app.
-    - If you want to use React(or any other JS library) as front-end, then:
-      - you'll need to disable `rails generations` of assets and templates in `config/application.rb`. Just un-comment below lines:
-        ```rb
-        g.assets false
-        g.template_engine false
-        ```
-      - Run the command:
-        ```bash
-        $ rails webpacker:install:react
-        ```
-      - Then build your front-end in `app/javascript` folder.
-    - You can start by running a scaffold:
-      ```bash
-      $ rails g scaffold Artile title:string body:text
-      ```
-    - Then Consider writing tests in `spec` folder.
-    - Add some more badges to your `README.md` file.
 
 -----
 -----
