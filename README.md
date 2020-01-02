@@ -11,7 +11,11 @@
 <!-- TODO: Add Additional badges here -->
 [![Ruby 2.6.5](https://img.shields.io/badge/Ruby-v2.6.5-green.svg)](https://www.ruby-lang.org/en/)
 [![Rails 6.0.2](https://img.shields.io/badge/Rails-v6.0.2-brightgreen.svg)](https://rubyonrails.org/)
+[![React 16.12.0](https://img.shields.io/badge/React-v16.12.0-blue.svg)](https://reactjs.org/)
 [![Rspec 3.9](https://img.shields.io/badge/RSpec-v3.9-red.svg)](http://rspec.info/)
+[![Build Status](https://travis-ci.org/drabkirn/authna.svg?branch=master)](https://travis-ci.org/drabkirn/authna)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0359a16fea6ae6b46b83/maintainability)](https://codeclimate.com/github/drabkirn/authna/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0359a16fea6ae6b46b83/test_coverage)](https://codeclimate.com/github/drabkirn/authna/test_coverage)
 [![Issues](https://img.shields.io/github/issues/drabkirn/authna.svg)](https://github.com/drabkirn/authna/issues)
 [![Issues closed](https://img.shields.io/github/issues-closed/drabkirn/authna.svg)](https://github.com/drabkirn/authna/issues)
 [![Pulls](https://img.shields.io/github/issues-pr/drabkirn/authna.svg)](https://github.com/drabkirn/authna/pulls)
