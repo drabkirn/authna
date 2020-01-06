@@ -1,8 +1,17 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+import Login from './Auth/Login';
+import Signup from './Auth/Signup';
+import Dash from './Dash/Dash';
 
 function App() {
   return (
-    <h1>Hello world from Authna in React!</h1>
+    <Switch>
+      <Route exact path="/signup" component={ Signup } />
+      <Route exact path="/dash" component={ Dash } />
+      <Route path="/" component={ Login } />
+    </Switch>
   );
 }
 
