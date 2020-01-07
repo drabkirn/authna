@@ -4,11 +4,9 @@
 
 # Drabkirn Authna
 
-<!-- TODO: Add short desc here -->
-> Authentication
+> Plug and play user authentication system.
 
 <!-- Add languages, CI/CD, main frameworks used from shields.io. Example -->
-<!-- TODO: Add Additional badges here -->
 [![Ruby 2.6.5](https://img.shields.io/badge/Ruby-v2.6.5-green.svg)](https://www.ruby-lang.org/en/)
 [![Rails 6.0.2](https://img.shields.io/badge/Rails-v6.0.2-brightgreen.svg)](https://rubyonrails.org/)
 [![React 16.12.0](https://img.shields.io/badge/React-v16.12.0-blue.svg)](https://reactjs.org/)
@@ -22,7 +20,7 @@
 [![Pulls](https://img.shields.io/github/issues-pr-closed/drabkirn/authna.svg)](https://github.com/drabkirn/authna/pulls)
 [![License](https://img.shields.io/github/license/drabkirn/authna.svg)](https://choosealicense.com/licenses/agpl-3.0/)
 
-<!-- TODO: Full Description of Project goes here -->
+Why re-create user's authentication in every app that you build? You can fire up an Authna server, configure your apps to use Authna, and get your users authenticated. Sweet and simple.
 
 <!-- TODO: Demo or website here -->
 <!-- **[Visit Website here](https://go.brinkirn.xyz/go)** -->
@@ -41,6 +39,7 @@
 
 ## Installation
 <!-- TODO: Change these steps to mirror your repo's installation -->
+**Coming soon...**
 
 -----
 -----
