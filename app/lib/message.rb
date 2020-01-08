@@ -100,6 +100,11 @@ class Message
     "Invalid recovery token. Please check the token and try again."
   end
 
+  # Appza Messages
+  def self.appza_show_loaded(id)
+    "Appza with ID: #{id} loaded"
+  end
+
   # Model Validation Messages
   def self.valid_https_url
     "Must be a valid HTTPS URL."

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
       post 'auth/password/forgot', to: 'passwords#forgot'
       post 'auth/password/recover', to: 'passwords#recover'
+
+      resources :appzas, only: [:show]
     end
   end
 
