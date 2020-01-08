@@ -100,6 +100,15 @@ class Message
     "Invalid recovery token. Please check the token and try again."
   end
 
+  # Model Validation Messages
+  def self.valid_https_url
+    "Must be a valid HTTPS URL."
+  end
+
+  def self.valid_hosts_url
+    "URL must have a valid host."
+  end
+
   # Others, System messages
   def self.invalid_csrf_token
     "Exception: You're not authorized to make this request - CSRF Error."

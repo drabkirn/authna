@@ -29,6 +29,16 @@ RSpec.describe Appza, type: :model do
     it "should respond to requires" do
       expect(appza).to respond_to(:requires)
     end
+
+    it "if url is whitelisted" do
+      appza.url = 'http://localhost:3000'
+      expect(appza).to be_valid
+    end
+
+    it "if callback_url is whitelisted" do
+      appza.callback_url = 'http://localhost:3000'
+      expect(appza).to be_valid
+    end
   end
 
   describe "is invalid" do
@@ -62,6 +72,18 @@ RSpec.describe Appza, type: :model do
       expect(appza).to_not be_valid
     end
 
+    it "is invalid if url is http and returns error message" do
+      appza.url = 'http://abc.com'
+      expect(appza).to_not be_valid
+      expect(appza.errors.messages[:url][0]).to eq Message.valid_https_url
+    end
+
+    it "is invalid if url doesn't have a host and returns error message" do
+      appza.url = 'https://'
+      expect(appza).to_not be_valid
+      expect(appza.errors.messages[:url][0]).to eq Message.valid_hosts_url
+    end
+
     it "is invalid without a callback_url" do
       appza.callback_url = nil
       expect(appza).to_not be_valid
@@ -70,6 +92,18 @@ RSpec.describe Appza, type: :model do
     it "is invalid if callback_url is empty" do
       appza.callback_url = ''
       expect(appza).to_not be_valid
+    end
+
+    it "is invalid if callback_url is http and returns error message" do
+      appza.callback_url = 'http://abc.com'
+      expect(appza).to_not be_valid
+      expect(appza.errors.messages[:callback_url][0]).to eq Message.valid_https_url
+    end
+
+    it "is invalid if callback_url doesn't have a host and returns error message" do
+      appza.callback_url = 'https://'
+      expect(appza).to_not be_valid
+      expect(appza.errors.messages[:callback_url][0]).to eq Message.valid_hosts_url
     end
 
     it "is invalid without a accept_header" do
