@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Appza, type: :model do
-  let(:appza) { FactoryBot.build :appza }
+  let(:appza) { FactoryBot.create :appza }
   
   subject { appza }
 
@@ -28,6 +28,14 @@ RSpec.describe Appza, type: :model do
     
     it "should respond to requires" do
       expect(appza).to respond_to(:requires)
+    end
+
+    it "should respond to secret" do
+      expect(appza).to respond_to(:secret)
+    end
+
+    it "should respond to user_id" do
+      expect(appza).to respond_to(:user_id)
     end
 
     it "if url is whitelisted" do
@@ -129,6 +137,25 @@ RSpec.describe Appza, type: :model do
     it "is invalid if requires is > 4" do
       appza.requires = ["a", "b", "c", "d", "e"]
       expect(appza).to_not be_valid
+    end
+
+    it "is invalid if secret length is != 30" do
+      appza.secret = 'ab'
+      expect(appza).to_not be_valid
+    end
+
+    it "is invalid if user is not an admin" do
+      user2 = FactoryBot.create(:user)
+      appza.user = user2
+      appza.save
+      expect(appza).to_not be_valid
+    end
+
+    it "shows invalid message if user is not admin" do
+      user2 = FactoryBot.create(:user)
+      appza.user = user2
+      appza.save
+      expect(appza.errors[:user_id][0]).to eq Message.must_be_admin
     end
   end
 end

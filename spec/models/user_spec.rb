@@ -123,6 +123,82 @@ RSpec.describe User, type: :model do
       end
     end
 
+    context "first_name validations" do
+      it { should validate_presence_of(:first_name) }
+
+      it "should respond to first_name" do
+        expect(user).to respond_to(:first_name)
+      end
+
+      it "is invalid with a blank first_name" do
+        user.first_name = " "
+        user.valid?
+        expect(user.errors[:first_name]).to include("can't be blank")
+      end
+
+      it "is invalid with no first_name" do
+        user.first_name = nil
+        user.valid?
+        expect(user.errors[:first_name]).to include("can't be blank")
+      end
+
+      it "is invalid if length is < 3" do
+        user.first_name = "ab"
+        user.valid?
+        expect(user.errors[:first_name]).to include("is too short (minimum is 3 characters)")
+      end
+
+      it "is invalid if length is > 30" do
+        user.first_name = "1234567891234567891234567891234"
+        user.valid?
+        expect(user.errors[:first_name]).to include("is too long (maximum is 30 characters)")
+      end
+    end
+
+    context "last_name validations" do
+      it { should validate_presence_of(:last_name) }
+
+      it "should respond to last_name" do
+        expect(user).to respond_to(:last_name)
+      end
+
+      it "is invalid with a blank last_name" do
+        user.last_name = " "
+        user.valid?
+        expect(user.errors[:last_name]).to include("can't be blank")
+      end
+
+      it "is invalid with no last_name" do
+        user.last_name = nil
+        user.valid?
+        expect(user.errors[:last_name]).to include("can't be blank")
+      end
+
+      it "is invalid if length is < 3" do
+        user.last_name = "ab"
+        user.valid?
+        expect(user.errors[:last_name]).to include("is too short (minimum is 3 characters)")
+      end
+
+      it "is invalid if length is > 30" do
+        user.last_name = "1234567891234567891234567891234"
+        user.valid?
+        expect(user.errors[:last_name]).to include("is too long (maximum is 30 characters)")
+      end
+    end
+
+    context "admin validations" do
+      it "should respond to admin" do
+        expect(user).to respond_to(:admin)
+      end
+
+      it "is invalid with no admin" do
+        user.admin = nil
+        user.valid?
+        expect(user.errors[:admin]).to include("is not included in the list")
+      end
+    end
+
     context "confirmation attributes" do
       it "user is unconfimred" do
         expect(user.confirmed_at).to eq nil

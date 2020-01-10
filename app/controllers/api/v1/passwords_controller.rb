@@ -15,9 +15,9 @@ class Api::V1::PasswordsController < ApplicationController
       PasswordMailer.forget_email(user).deliver_now
       send_response = {
         status: 200,
+        message: Message.password_reset_message_sent,
         data: {
-          user_email: user.email,
-          message: Message.password_reset_message_sent
+          email: user.email
         }
       }
       json_response(send_response)
@@ -40,9 +40,8 @@ class Api::V1::PasswordsController < ApplicationController
     if user.update(user_params)
       send_response = {
         status: 200,
-        data: {
-          message: Message.password_reset_success
-        }
+        message: Message.password_reset_success,
+        data: {}
       }
       json_response(send_response)
     else

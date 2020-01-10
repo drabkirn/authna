@@ -11,7 +11,7 @@ RSpec.describe Api::V1::ConfirmationsController, type: :request do
       end
       
       it "renders that user has confirmed the email" do
-        expect(json['data']['message']).to eq Message.email_successfully_confirmed(user.email)
+        expect(json['message']).to eq Message.email_successfully_confirmed(user.email)
       end
       
       it_behaves_like 'returns 200 success status'
@@ -49,7 +49,7 @@ RSpec.describe Api::V1::ConfirmationsController, type: :request do
       end
       
       it "renders that email confirmation has been sent" do
-        expect(json['data']['message']).to eq Message.email_confirmation_resent(user.email)
+        expect(json['message']).to eq Message.email_confirmation_resent(user.email)
       end
       
       it_behaves_like 'returns 200 success status'

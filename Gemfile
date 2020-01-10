@@ -45,6 +45,7 @@ group :test do
   gem 'capybara', '~> 3.29'
   gem 'selenium-webdriver', '~> 3.142', '>= 3.142.6'
   gem 'webdrivers', '~> 4.1', '>= 4.1.3'
+  gem 'webmock', '~> 3.7', '>= 3.7.6'
 end
 
 ## Custom Gems:

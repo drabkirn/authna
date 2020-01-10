@@ -5,9 +5,8 @@ class Api::V1::MultiFactorAuthenticationController < ApplicationController
       current_user.otp_module_enabled!
       send_response = {
         status: 200,
-        data: {
-          message: Message.two_fa_enabled
-        }
+        message: Message.two_fa_enabled,
+        data: {}
       }
       json_response(send_response)
     else
@@ -29,9 +28,8 @@ class Api::V1::MultiFactorAuthenticationController < ApplicationController
       current_user.save
       send_response = {
         status: 200,
-        data: {
-          message: Message.two_fa_disabled
-        }
+        message: Message.two_fa_disabled,
+        data: {}
       }
       json_response(send_response)
     else

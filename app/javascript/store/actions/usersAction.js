@@ -1,5 +1,5 @@
 // Create a New User - Signup
-export const createNewUserAccount = (email, username, password, password_confirmation, csrfToken) => {
+export const createNewUserAccount = (email, username, firstName, lastName, password, password_confirmation, csrfToken) => {
   return (dispatch) => {
     var myHeaders = {
       'Content-Type': 'application/json',
@@ -12,6 +12,8 @@ export const createNewUserAccount = (email, username, password, password_confirm
       "user":{
         "email": email,
         "username": username,
+        "first_name": firstName,
+        "last_name": lastName,
         "password": password,
         "password_confirmation": password_confirmation
       }
@@ -121,6 +123,40 @@ export const createNewUserSessionWithUsername = (username, password, otp_code_to
       }).catch((err) => {
         dispatch({
           type: 'CREATE_USER_SESSION_WITH_USERNAME_ERROR',
+          err: err
+        });
+      });
+  };
+};
+
+// Fetch User Info - GET /users/:id
+export const fetchUserInfo = (auth_token) => {
+  return (dispatch) => {
+    var myHeaders = {
+      'Content-Type': 'application/json',
+      'User-Agent': 'Drabkirn Authna : Official Website : NA',
+      'Accept': 'application/drabkirn.authna.v1',
+      'Authorization': auth_token
+    };
+    
+    fetch('/users/show', { method: 'GET', headers: myHeaders })
+      .then((response) => {
+        return response.json();
+      }).then((res) => {
+        if(res.errors){
+          dispatch({
+            type: 'FETCH_USER_INFO_API_ERROR',
+            err: res
+          });
+        } else {
+          dispatch({
+            type: 'FETCH_USER_INFO_SUCCESS',
+            payload: res
+          });
+        }
+      }).catch((err) => {
+        dispatch({
+          type: 'FETCH_USER_INFO_ERROR',
           err: err
         });
       });

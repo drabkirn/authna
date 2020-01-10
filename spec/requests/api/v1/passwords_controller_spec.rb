@@ -11,7 +11,7 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
       end
 
       it "returns password_reset_message_sent message" do
-        expect(json['data']['message']).to eq Message.password_reset_message_sent
+        expect(json['message']).to eq Message.password_reset_message_sent
       end
 
       it_behaves_like 'returns 200 success status'
@@ -54,7 +54,7 @@ RSpec.describe Api::V1::PasswordsController, type: :request do
       end
 
       it "returns password_reset_success message" do
-        expect(json['data']['message']).to eq Message.password_reset_success
+        expect(json['message']).to eq Message.password_reset_success
       end
 
       it_behaves_like 'returns 200 success status'

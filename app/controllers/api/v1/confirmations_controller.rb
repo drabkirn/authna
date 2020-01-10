@@ -12,9 +12,8 @@ class Api::V1::ConfirmationsController < ApplicationController
     user.confirm
     send_response = {
       status: 200,
-      data: {
-        message: Message.email_successfully_confirmed(user.email)
-      }
+      message: Message.email_successfully_confirmed(user.email),
+      data: { }
     }
     json_response(send_response)
   end
@@ -25,9 +24,8 @@ class Api::V1::ConfirmationsController < ApplicationController
     user.resend_confirmation_instructions
     send_response = {
       status: 200,
-      data: {
-        message: Message.email_confirmation_resent(user_email)
-      }
+      message: Message.email_confirmation_resent(user_email),
+      data: {}
     }
     json_response(send_response)
   end

@@ -17,9 +17,12 @@ ActiveRecord::Schema.define(version: 2020_01_08_050123) do
     t.string "url", default: ""
     t.string "callback_url", default: ""
     t.string "accept_header", default: ""
+    t.string "secret", default: ""
     t.text "requires"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["secret"], name: "index_appzas_on_secret", unique: true
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -34,11 +37,15 @@ ActiveRecord::Schema.define(version: 2020_01_08_050123) do
     t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name", default: ""
+    t.string "last_name", default: ""
     t.string "username"
+    t.boolean "admin", default: false
     t.string "otp_secret_key"
     t.integer "otp_module", default: 0
     t.string "provider"
     t.string "uid"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

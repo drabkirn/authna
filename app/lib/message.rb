@@ -16,6 +16,10 @@ class Message
     "Error: User not found in our records."
   end
 
+  def self.user_loaded(id)
+    "User with ID: #{id} loaded."
+  end
+
   # API Messages
   def self.invalid_authorization_token
     "Exception: Invalid Authorization token. Not enough or too many segments."
@@ -102,7 +106,15 @@ class Message
 
   # Appza Messages
   def self.appza_show_loaded(id)
-    "Appza with ID: #{id} loaded"
+    "Appza with ID: #{id} loaded."
+  end
+
+  def self.appza_user_successfully_authenticated
+    "Appza user has been successfully authenticated."
+  end
+
+  def self.appza_user_authentication_failed
+    "Error: Authentication failed - Remote Error."
   end
 
   # Model Validation Messages
@@ -112,6 +124,10 @@ class Message
 
   def self.valid_hosts_url
     "URL must have a valid host."
+  end
+
+  def self.must_be_admin
+    "User must be an admin for this operation."
   end
 
   # Others, System messages

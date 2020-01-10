@@ -11,7 +11,7 @@ RSpec.describe Api::V1::MultiFactorAuthenticationController, type: :request do
       end
 
       it "successfully enables and sends success message" do
-        expect(json['data']['message']).to eq Message.two_fa_enabled
+        expect(json['message']).to eq Message.two_fa_enabled
       end
 
       it_behaves_like 'returns 200 success status'
@@ -84,7 +84,7 @@ RSpec.describe Api::V1::MultiFactorAuthenticationController, type: :request do
         end
 
         it "successfully disables and sends success message" do
-          expect(json['data']['message']).to eq Message.two_fa_disabled
+          expect(json['message']).to eq Message.two_fa_disabled
         end
 
         it "regenerates the otp_secret_key" do

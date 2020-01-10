@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       post 'auth/password/recover', to: 'passwords#recover'
 
       resources :appzas, only: [:show]
+      post 'auth/appzas/login', to: 'appzas#authenticate'
+
+      get 'users/show', to: 'users#show'
     end
   end
 

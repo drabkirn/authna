@@ -55,7 +55,7 @@ module RequestSpecHelper
     {
       "Authorization" => token_generator(user.id),
       "Content-Type" => "application/json",
-      "Accept" => "application/brinkirn.authna.v1"
+      "Accept" => "application/drabkirn.authna.v1"
     }
   end
 
@@ -63,7 +63,7 @@ module RequestSpecHelper
     {
       "Authorization" => nil,
       "Content-Type" => "application/json",
-      "Accept" => "application/brinkirn.authna.v1"
+      "Accept" => "application/drabkirn.authna.v1"
     }
   end
 

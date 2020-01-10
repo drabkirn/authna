@@ -17,32 +17,12 @@ RSpec.describe Api::V1::AuthenticationController, type: :request do
         post api_auth_login_path, params: user_v_email_credentials.to_json, headers: api_v_headers
       end
 
-      it 'returns an authentication token' do
+      it 'returns non-empty authentication token' do
         expect(json['data']['auth_token']).not_to be_nil
       end
 
       it 'returns successfully authenticated message' do
-        expect(json['data']['message']).to eq Message.user_successfully_authenticated
-      end
-
-      it 'returns user data' do
-        auth_user_obj = {
-          id: json['data']['user_id'],
-          email: json['data']['user_email'],
-          username: json['data']['user_username'],
-          user_otp_secret_key: json['data']['user_otp_secret_key'],
-          user_otp_module: json['data']['user_otp_module'],
-          user_email_confirmation: json['data']['user_email_confirmation']
-        }
-        user_obj = {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          user_otp_secret_key: user.otp_secret_key,
-          user_otp_module: user.otp_module,
-          user_email_confirmation: user.confirmed_at
-        }
-        expect(auth_user_obj).to eq user_obj
+        expect(json['message']).to eq Message.user_successfully_authenticated
       end
 
       it_behaves_like 'returns 200 success status'
@@ -53,34 +33,12 @@ RSpec.describe Api::V1::AuthenticationController, type: :request do
         post api_auth_login_path, params: user_v_username_credentials.to_json, headers: api_v_headers
       end
 
-      it 'returns an authentication token' do
+      it 'returns non-empty authentication token' do
         expect(json['data']['auth_token']).not_to be_nil
       end
 
       it 'returns successfully authenticated message' do
-        expect(json['data']['message']).to eq Message.user_successfully_authenticated
-      end
-
-      it 'returns user data' do
-        auth_user_obj = {
-          id: json['data']['user_id'],
-          email: json['data']['user_email'],
-          username: json['data']['user_username'],
-          user_otp_secret_key: json['data']['user_otp_secret_key'],
-          user_otp_module: json['data']['user_otp_module'],
-          user_email_confirmation: json['data']['user_email_confirmation'],
-          user_github_linked: json['data']['user_github_linked']
-        }
-        user_obj = {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          user_otp_secret_key: user.otp_secret_key,
-          user_otp_module: user.otp_module,
-          user_email_confirmation: user.confirmed_at,
-          user_github_linked: user.provider?
-        }
-        expect(auth_user_obj).to eq user_obj
+        expect(json['message']).to eq Message.user_successfully_authenticated
       end
 
       it_behaves_like 'returns 200 success status'

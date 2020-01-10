@@ -2,7 +2,7 @@ class Api::V1::AuthenticationController < ApplicationController
   # No need to check for `Authorization` header defined in `application_controller.rb`
   skip_before_action :authorize_request, only: :authenticate
   
-  # Check for authentication and send back user data if correct
+  # Check for authentication and send back auth_token if correct
   # If authentication is wrong, returns errors defined in `auth/authenticate_user.rb`
   def authenticate
     if auth_params[:email].present?
@@ -12,16 +12,9 @@ class Api::V1::AuthenticationController < ApplicationController
     end
     send_response = {
       status: 200,
+      message: Message.user_successfully_authenticated,
       data: {
-        auth_token: auth_token,
-        message: Message.user_successfully_authenticated,
-        user_id: user.id,
-        user_email: user.email,
-        user_username: user.username,
-        user_otp_secret_key: user.otp_secret_key,
-        user_otp_module: user.otp_module,
-        user_email_confirmation: user.confirmed_at,
-        user_github_linked: false
+        auth_token: auth_token
       }
     }
     json_response(send_response)

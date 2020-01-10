@@ -18,6 +18,10 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+# Webmock API, Initialize + disallow making internet requests
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true, allow: 'https://drabkirn.authna.invalid2')
+
 # DB Cleaner
 require 'database_cleaner'
 
@@ -107,4 +111,43 @@ RSpec.configure do |config|
 
   # Our custom helprs
   config.include RequestSpecHelper
+
+  # Webmock, Stubbing requests
+  config.before(:each) do
+    stub_request(:post, "https://drabkirn.authna").
+      with(
+        headers: {
+          'Accept'=>'accept_all',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent'=>'Drabkirn Authna : Official Website : NA',
+          'Content-Type'=>'application/json'
+        }
+      ).
+      to_return(
+        status: 200,
+        body: {
+          status: 200,
+          data: {}
+        }.to_json.to_s,
+        headers: {}
+      )
+
+    stub_request(:post, "https://drabkirn.authna.invalid").
+      with(
+        headers: {
+          'Accept'=>'accept_all',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent'=>'Drabkirn Authna : Official Website : NA',
+          'Content-Type'=>'application/json'
+        }
+      ).
+      to_return(
+        status: 400,
+        body: {
+          status: 400,
+          data: {}
+        }.to_json.to_s,
+        headers: {}
+      )
+  end
 end

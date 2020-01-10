@@ -49,7 +49,7 @@ RSpec.describe ApplicationController, type: :request do
       end
 
       it 'returns successfully authenticated message' do
-        expect(json['data']['message']).to eq Message.user_successfully_authenticated
+        expect(json['message']).to eq Message.user_successfully_authenticated
       end
 
       it "returns application/json content type in response header" do

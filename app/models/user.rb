@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
+  has_many :appzas, dependent: :destroy
+  
   # OTP Token
   has_one_time_password
   enum otp_module: { disabled: 0, enabled: 1 }, _prefix: true
@@ -12,6 +14,9 @@ class User < ApplicationRecord
   USERNAME_REGEX = /\A[a-z0-9\_]+\z/i
 
   validates :username, uniqueness: { case_sensitive: true }, presence: true, length: { minimum: 3, maximum: 10 }, format: { with: USERNAME_REGEX, multiline: true }
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 30 }
+  validates :last_name, presence: true, length: { minimum: 3, maximum: 30 }
+  validates_inclusion_of :admin, in: [true, false]
 
   before_save :downcase_username
 

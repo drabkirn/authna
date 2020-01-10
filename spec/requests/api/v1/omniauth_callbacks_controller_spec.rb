@@ -28,7 +28,7 @@ RSpec.describe Api::V1::OmniauthCallbacksController, type: :request do
       # TODO: Add full object test here
 
       it "successfully sends authenticated message" do
-        expect(json['data']['message']).to eq Message.user_successfully_authenticated
+        expect(json['message']).to eq Message.user_successfully_authenticated
       end
 
       it_behaves_like 'returns 200 success status'
