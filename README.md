@@ -19,6 +19,7 @@
 [![Pulls](https://img.shields.io/github/issues-pr/drabkirn/authna.svg)](https://github.com/drabkirn/authna/pulls)
 [![Pulls](https://img.shields.io/github/issues-pr-closed/drabkirn/authna.svg)](https://github.com/drabkirn/authna/pulls)
 [![License](https://img.shields.io/github/license/drabkirn/authna.svg)](https://choosealicense.com/licenses/agpl-3.0/)
+[![CLA assistant](https://cla-assistant.io/readme/badge/drabkirn/authna)](https://cla-assistant.io/drabkirn/authna) 
 
 Why re-create user's authentication in every app that you build? You can fire up an Authna server, configure your apps to use Authna, and get your users authenticated. Sweet and simple.
 
