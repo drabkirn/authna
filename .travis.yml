@@ -1,6 +1,6 @@
 language: ruby
 os: linux
-dist: xenial
+dist: bionic
 cache:
   directories:
     - vendor/bundle
@@ -20,7 +20,7 @@ before_install:
   - source /home/travis/.yvm/yvm.sh
   - yvm install $YARN_VERSION
   - yvm use $YARN_VERSION
-  - gem install bundler:2.0.2
+  - gem install bundler:2.1.4
   - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
   - tar -zxvf geckodriver-v0.24.0-linux64.tar.gz
   - sudo mv geckodriver /usr/local/bin/
