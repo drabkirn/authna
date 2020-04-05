@@ -7,8 +7,8 @@
 > Plug and play user authentication system.
 
 <!-- Add languages, CI/CD, main frameworks used from shields.io. Example -->
-[![Ruby 2.6.5](https://img.shields.io/badge/Ruby-v2.6.5-green.svg)](https://www.ruby-lang.org/en/)
-[![Rails 6.0.2](https://img.shields.io/badge/Rails-v6.0.2-brightgreen.svg)](https://rubyonrails.org/)
+[![Ruby 2.7.1](https://img.shields.io/badge/Ruby-v2.7.1-green.svg)](https://www.ruby-lang.org/en/)
+[![Rails 6.0.2.2](https://img.shields.io/badge/Rails-v6.0.2.2-brightgreen.svg)](https://rubyonrails.org/)
 [![React 16.12.0](https://img.shields.io/badge/React-v16.12.0-blue.svg)](https://reactjs.org/)
 [![Rspec 3.9](https://img.shields.io/badge/RSpec-v3.9-red.svg)](http://rspec.info/)
 [![Build Status](https://travis-ci.org/drabkirn/authna.svg?branch=master)](https://travis-ci.org/drabkirn/authna)
@@ -39,8 +39,7 @@ Why re-create user's authentication in every app that you build? You can fire up
 
 
 ## Installation
-<!-- TODO: Change these steps to mirror your repo's installation -->
-**Coming soon...**
+**We like to keep our GitHub repo clean and simple. So for usage and installation guides, please check out our [documentation here](https://go.cdadityang.xyz/AdocsU)**
 
 -----
 -----

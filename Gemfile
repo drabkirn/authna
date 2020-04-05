@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.1'
 
 gem 'rails', '~> 6.0.2.2'
 gem 'mysql2', '~> 0.5.3'
@@ -11,10 +11,6 @@ gem 'jbuilder', '~> 2.9', '>= 2.9.1'
 gem 'bootsnap', '~> 1.4', '>= 1.4.5', require: false
 gem 'tzinfo-data', '~> 1.2019', '>= 1.2019.3'
 
-# Delete these if using React/other for FE - START
-# gem 'sass-rails', '>= 6'
-# gem 'turbolinks', '~> 5.2', '>= 5.2.1'
-# Delete these if using React/other for FE - END
 
 group :development, :test do
   gem 'byebug', '~> 11.0', '>= 11.0.1', platforms: [:mri, :mingw, :x64_mingw]
