@@ -1,6 +1,41 @@
 class Api::V1::AppzasController < ApplicationController
   # No need to check for `Authorization` header defined in `application_controller.rb`
   skip_before_action :authorize_request, only: [:show]
+  before_action :require_admin, only: [:index, :create]
+
+  # Show admin users all Appza details
+  def index
+    @appzas = @current_user.appzas
+    send_response = {
+      status: 200,
+      message: Message.appzas_loaded,
+      data: @appzas
+    }
+    json_response(send_response)
+  end
+
+  def create
+    @appza = Appza.new(appza_create_params)
+    @appza.user = @current_user
+    if @appza.save
+      send_response = {
+        status: 201,
+        message: Message.appza_created(@appza.id),
+        data: {
+          id: @appza.id
+        }
+      }
+      json_response(send_response, :created)
+    else
+      send_response = {
+        status: 422,
+        errors: {
+          message: Message.appza_creation_failed(@appza.errors.full_messages)
+        }
+      }
+      json_response(send_response, :unprocessable_entity)
+    end
+  end
 
   # Show info about Appza, doesn't include secret data
   def show
@@ -48,6 +83,22 @@ class Api::V1::AppzasController < ApplicationController
 
   def appza_params
     params.require(:appza).permit(:id)
+  end
+
+  def appza_create_params
+    params.require(:appza).permit(:name, :url, :callback_url, :accept_header, requires: [])
+  end
+
+  def require_admin
+    if !@current_user.admin
+      send_response = {
+        status: 401,
+        errors: {
+          message: Message.require_admin
+        }
+      }
+      json_response(send_response, :unauthorized)
+    end
   end
 
   def make_request_to_appza_callback(appza, current_user, auth_token)

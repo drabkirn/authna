@@ -20,6 +20,10 @@ class Message
     "User with ID: #{id} loaded."
   end
 
+  def self.require_admin
+    "Admin is required to perform such actions."
+  end
+
   # API Messages
   def self.invalid_authorization_token
     "Exception: Invalid Authorization token. Not enough or too many segments."
@@ -105,8 +109,20 @@ class Message
   end
 
   # Appza Messages
+  def self.appzas_loaded
+    "All appzas loaded."
+  end
+
   def self.appza_show_loaded(id)
     "Appza with ID: #{id} loaded."
+  end
+
+  def self.appza_created(id)
+    "Appza with ID: #{id} successfully created."
+  end
+
+  def self.appza_creation_failed(messages)
+    "Error: Appza could not be created. #{messages.join(", ")}"
   end
 
   def self.appza_user_successfully_authenticated

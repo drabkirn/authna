@@ -66,10 +66,18 @@ function Dash() {
             <p>ID: { user.id }</p>
             <p>Email: {user.email}</p>
             <p>Username: {user.username}</p>
-            <p>Admin: {user.admin}</p>
+            <p>Admin: { user.admin ? "true" : "false"}</p>
             <p>Email confirmation: {user.email_confirmation}</p>
           </div>
         ) : ("")
+      }
+
+      {
+        user && user.admin && (
+          <div>
+            <Link to="/appza">App Dashboard</Link>
+          </div>
+        )
       }
 
       <hr />
